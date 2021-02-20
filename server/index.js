@@ -2,7 +2,7 @@ const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const router = require("./router");
-const {addUser} = require("./methods");
+const {addUser,getUser,getUserInRoom,removeUser} = require("./methods");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
