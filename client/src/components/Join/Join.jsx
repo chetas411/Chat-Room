@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -29,8 +30,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Join = () => {
-  const classes = useStyles();
+  const [name,setName] = useState('');  
+  const [room,setRoom] = useState('');  
 
+  const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -51,6 +54,8 @@ const Join = () => {
             label="Username"
             name="username"
             autoComplete="username"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
             autoFocus
           />
           <TextField
@@ -63,15 +68,19 @@ const Join = () => {
             type="text"
             id="room"
             autoComplete="room"
+            value={room}
+            onChange={(event) => setRoom(event.target.value)}
           />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Join Room
-          </Button>
+          <Link onClick = {(event)=>(!name || !room)? event.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Join Room
+            </Button>
+          </Link>
         </form>
       </div>
     </Container>
