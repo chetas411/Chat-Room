@@ -17,9 +17,9 @@ const io = socketio(server, {
 
 io.on("connection", (socket) => {
     socket.on("joinroom", ({ name, room }, callback) => {
-        console.log("user joined");
         const { error, user } = addUser({ id: socket.id, name, room });
-        if (error) callback(error);
+        if (error) return callback(error);
+        console.log("user joined");
         socket.emit("message", { user: "admin", text: `Welcome ${name} to ${room}!` });
         socket.broadcast.to(user.room).emit("message", { user: "admin", text: `${name} joined` });
         socket.join(user.room);
