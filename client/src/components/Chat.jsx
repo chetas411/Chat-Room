@@ -85,7 +85,7 @@ const Chat = ({ location }) => {
                 <Grid className={classes.grid} container spacing={3}>
                     <Grid item xs={3}>
                         <Paper className={classes.paper} elevation={24} >
-                            <h3>Active Users</h3>
+                            <h2>Active Users</h2>
                             <List >
                                 {
                                     users.map((user)=>{
@@ -104,7 +104,7 @@ const Chat = ({ location }) => {
                     </Grid>
                     <Grid item xs={9}>
                         <Paper className={classes.paper} elevation={24} >
-                            <h3>{room}</h3>
+                            <h2>{room}</h2>
                             <Messages messages = {messages} name = {name}/>
                             <Grid container  style={{ padding: '20px',position: 'absolute', bottom: 0}} >
                                 <Grid item xs={11}>
