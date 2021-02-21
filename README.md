@@ -6,3 +6,4 @@ A *Real time* chat application where users can join rooms and chat with each oth
 *Backend: Node.js, Express, Socket.io*
 
 ## Demo:
+![demo](https://github.com/chetas411/Chat-Room/blob/main/demo.gif)
