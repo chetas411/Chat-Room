@@ -84,13 +84,13 @@ const Chat = ({ location }) => {
             <div className={classes.root}>
                 <Grid className={classes.grid} container spacing={3}>
                     <Grid item xs={3}>
-                        <Paper className={classes.paper} elevation={6} >
+                        <Paper className={classes.paper} elevation={24} >
                             <h3>Active Users</h3>
                             <List >
                                 {
                                     users.map((user)=>{
                                         return (
-                                            <ListItem button>
+                                            <ListItem button divider>
                                                 <ListItemIcon >
                                                     <FiberManualRecordIcon style={{ color: green[400] }} />
                                                 </ListItemIcon>
@@ -103,7 +103,7 @@ const Chat = ({ location }) => {
                         </Paper>
                     </Grid>
                     <Grid item xs={9}>
-                        <Paper className={classes.paper} elevation={6} >
+                        <Paper className={classes.paper} elevation={24} >
                             <h3>{room}</h3>
                             <Messages messages = {messages} name = {name}/>
                             <Grid container  style={{ padding: '20px',position: 'absolute', bottom: 0}} >
