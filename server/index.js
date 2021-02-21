@@ -23,11 +23,21 @@ io.on("connection", (socket) => {
         socket.emit("message", { user: "admin", text: `Welcome ${name} to ${room}!` });
         socket.broadcast.to(user.room).emit("message", { user: "admin", text: `${name} joined` });
         socket.join(user.room);
+        io.to(user.room).emit("roomData",{room: user.room, users: getUserInRoom(user.room)});
     });
+
+    socket.on("sendMessage",(message,callback)=>{
+        const user = getUser(socket.id);
+        io.to(user.room).emit("message",{user: user.name, text: message});
+        callback();
+    })
 
     socket.on("disconnect",()=>{
         const user = removeUser(socket.id);
-        if(user) console.log("User disconnected.");
+        if(user){
+            io.to(user.room).emit("message",{user: "admin", text: `${user.name} left`})
+            io.to(user.room).emit("roomData", { room: user.room, users: getUserInRoom(user.room) });
+        }
     });
 });
 
