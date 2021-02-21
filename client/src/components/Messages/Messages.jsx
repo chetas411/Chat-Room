@@ -8,7 +8,7 @@ const Messages = ({messages,name}) => {
         <ScrollToBottom className = "messages">
         {
             messages.map((message)=>{
-                let pos = (name === message.user)? "right" : "left";
+                let pos = (name.trim().toLowerCase() === message.user)? "right" : "left";
                 return <Message pos = {pos} message = {message.text} user = {message.user} /> 
             })
         }
