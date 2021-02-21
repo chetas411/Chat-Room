@@ -8,9 +8,12 @@ import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { green } from '@material-ui/core/colors';
 import Messages from '../components/Messages/Messages';
 
 
@@ -38,6 +41,7 @@ const Chat = ({ location }) => {
     const [room, setRoom] = useState('');
     const [message,setMessage] = useState('');
     const [messages,setMessages] = useState([]);
+    const [users,setUsers] = useState([]);
     const ENDPOINT = "localhost:5000";
 
     useEffect(() => {
@@ -55,12 +59,23 @@ const Chat = ({ location }) => {
         }
 
     }, [ENDPOINT, location.search]);
-    const sendMessage = (msg)=>{
-        const data = {user: name , text: msg};
-        setMessages((messages)=>{
-            return [...messages,data];
+
+    useEffect(()=>{
+        socket.on("message",(message)=>{
+            setMessages((messages)=>{
+                return [...messages,message];
+            });
         });
-        setMessage('');
+        
+        socket.on("roomData",({users})=>{
+            setUsers(users);
+        })
+    },[]);
+
+    const sendMessage = ()=>{
+        if(message){
+            socket.emit("sendMessage",message,()=>setMessage(''));
+        }
     };
     const classes = useStyles();
     return (
@@ -72,18 +87,18 @@ const Chat = ({ location }) => {
                         <Paper className={classes.paper} elevation={6} >
                             <h3>Active Users</h3>
                             <List >
-                                <ListItem button>
-                                    <ListItemText primary="User1" />
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemText primary="User2" />
-                                </ListItem>
-                                <ListItem  button>
-                                    <ListItemText primary="User3" />
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemText primary="User4" />
-                                </ListItem>
+                                {
+                                    users.map((user)=>{
+                                        return (
+                                            <ListItem button>
+                                                <ListItemIcon >
+                                                    <FiberManualRecordIcon style={{ color: green[400] }} />
+                                                </ListItemIcon>
+                                                <ListItemText primary={user.name} />
+                                            </ListItem>
+                                        )
+                                    })
+                                }
                             </List>
                         </Paper>
                     </Grid>
@@ -99,11 +114,11 @@ const Chat = ({ location }) => {
                                     fullWidth variant="outlined" 
                                     value={message}
                                     onChange = {(event)=>setMessage(event.target.value)}
-                                    onKeyPress = {(event)=>(event.key === "Enter")? sendMessage(message) : null}
+                                    onKeyPress = {(event)=>(event.key === "Enter")? sendMessage() : null}
                                     />
                                 </Grid>
                                 <Grid xs={1} align="right">
-                                    <Fab onClick={() => sendMessage(message)} color="primary" aria-label="add"><SendIcon /></Fab>
+                                    <Fab onClick={() => sendMessage()} color="primary" aria-label="add"><SendIcon /></Fab>
                                 </Grid>
                             </Grid>
                         </Paper>
