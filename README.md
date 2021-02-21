@@ -4,3 +4,5 @@ A *Real time* chat application where users can join rooms and chat with each oth
 ## Tech Stack:
 *Frontend: Reactjs, Material UI*<br/>
 *Backend: Node.js, Express, Socket.io*
+
+## Demo:
