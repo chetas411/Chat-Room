@@ -88,9 +88,9 @@ const Chat = ({ location }) => {
                             <h2>Active Users</h2>
                             <List >
                                 {
-                                    users.map((user)=>{
+                                    users.map((user,index)=>{
                                         return (
-                                            <ListItem button divider>
+                                            <ListItem key={index} button divider>
                                                 <ListItemIcon >
                                                     <FiberManualRecordIcon style={{ color: green[400] }} />
                                                 </ListItemIcon>

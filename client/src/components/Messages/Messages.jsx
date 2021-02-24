@@ -7,9 +7,9 @@ const Messages = ({messages,name}) => {
     return (
         <ScrollToBottom className = "messages">
         {
-            messages.map((message)=>{
+            messages.map((message,index)=>{
                 let pos = (name.trim().toLowerCase() === message.user)? "right" : "left";
-                return <Message pos = {pos} message = {message.text} user = {message.user} /> 
+                return <Message key={index} pos = {pos} message = {message.text} user = {message.user} /> 
             })
         }
         </ScrollToBottom>
