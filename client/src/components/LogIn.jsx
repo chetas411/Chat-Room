@@ -44,11 +44,11 @@ const LogIn = () => {
     useEffect(()=>{
         history.push(path);
     },[path])
-
+    const ENDPOINT = "http://localhost:5000";
     const handleSubmit = (e)=>{
         e.preventDefault();
         const formData = {email,password};
-        axios.post("http://localhost:5000/login",formData)
+        axios.post(`${ENDPOINT}/login`,formData)
         .then((res)=>setPath(res.data))
         .catch((err)=>console.log(err));
     }

@@ -46,10 +46,11 @@ const SignUp = () => {
     useEffect(()=>{
         history.push(path);
     },[path]);
+    const ENDPOINT = "http://localhost:5000";
     const handleSubmit = (e)=>{
         e.preventDefault();
         const formData = {fname,lname,email,password};
-        axios.post("http://localhost:5000/new",formData)
+        axios.post(`${ENDPOINT}/new`,formData)
         .then((res)=>setPath(res.data))
         .catch((err)=>console.log(err))
     }
