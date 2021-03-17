@@ -1,7 +1,19 @@
+const mongoose = require("mongoose");
+mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://localhost:27017/chat_db",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    }
+);
+mongoose.Promise = global.Promise;
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const router = require("./router");
+const cors = require("cors");
 const { addUser, getUser, getUserInRoom, removeUser } = require("./methods");
 
 const PORT = process.env.PORT || 5000;
@@ -14,6 +26,13 @@ const io = socketio(server, {
         methods: ["GET", "POST"]
     }
 });
+
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use(express.json());
+app.use(cors());
+app.use(router);
 
 io.on("connection", (socket) => {
     socket.on("joinroom", ({ name, room }, callback) => {
@@ -41,5 +60,4 @@ io.on("connection", (socket) => {
     });
 });
 
-app.use(router);
 server.listen(PORT, () => console.log(`Server is running on localhost:${PORT}`));
