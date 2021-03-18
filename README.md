@@ -4,7 +4,7 @@ A *Real time* chat application where users can join rooms and chat with each oth
 ## Tech Stack:
 *Frontend: Reactjs, Material UI*<br/>
 *Backend: Node.js, Express, Socket.io*<br/>
-*Databse: MongoDB*
+*Database: MongoDB*
 
 ## Demo:
 ![demo](https://github.com/chetas411/Chat-Room/blob/main/demo.gif)
