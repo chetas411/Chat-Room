@@ -5,22 +5,20 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { green } from '@material-ui/core/colors';
 import Messages from '../components/Messages/Messages';
+import SideBar from '../components/SideBar';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         padding: theme.spacing(6),
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(2)
+        },
         height: '100vh',
     },
     grid: {
@@ -32,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
         height: '85vh',
+        [theme.breakpoints.down('sm')]: {
+            height: '95vh'
+        }
     },
 }));
 
@@ -41,7 +42,7 @@ const Chat = ({ location }) => {
     const [room, setRoom] = useState('');
     const [message,setMessage] = useState('');
     const [messages,setMessages] = useState([]);
-    const [users,setUsers] = useState([]);
+    const [users,setUsers] = useState([{name:"Chetas"},{name:"Ketan"}]);
     const ENDPOINT = "http://localhost:5000";
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const Chat = ({ location }) => {
         
         socket.on("roomData",({users})=>{
             setUsers(users);
-        })
+        });
     },[]);
 
     const sendMessage = ()=>{
@@ -81,32 +82,14 @@ const Chat = ({ location }) => {
     return (
         <>
             <CssBaseline />
-            <div className={classes.root}>
+            <div className={classes.root} >
                 <Grid className={classes.grid} container spacing={3}>
-                    <Grid item xs={3}>
-                        <Paper className={classes.paper} elevation={24} >
-                            <h2>Active Users</h2>
-                            <List >
-                                {
-                                    users.map((user,index)=>{
-                                        return (
-                                            <ListItem key={index} button divider>
-                                                <ListItemIcon >
-                                                    <FiberManualRecordIcon style={{ color: green[400] }} />
-                                                </ListItemIcon>
-                                                <ListItemText primary={user.name} />
-                                            </ListItem>
-                                        )
-                                    })
-                                }
-                            </List>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={9}>
+                    <SideBar styleclass = {classes.paper} users = {users} />
+                    <Grid item xs={12} md={8} lg={9}>
                         <Paper className={classes.paper} elevation={24} >
                             <h2>{room}</h2>
                             <Messages messages = {messages} name = {name}/>
-                            <Grid container  style={{ padding: '20px',position: 'absolute', bottom: 0}} >
+                            <Grid container style={{ padding: '20px',position: 'absolute', bottom: 0, left: 0}} >
                                 <Grid item xs={11}>
                                     <TextField 
                                     id="outlined-basic-email" 
