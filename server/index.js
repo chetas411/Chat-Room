@@ -22,7 +22,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
     cors: {
-        origin: "https://chatterroom.netlify.app",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
