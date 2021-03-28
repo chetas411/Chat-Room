@@ -9,4 +9,4 @@ A *Real time* chat application where users can join rooms and chat with each oth
 ## Demo:
 ![demo](https://github.com/chetas411/Chat-Room/blob/main/demo.gif)
 
-*Project is live at: https://serene-noether-84f896.netlify.app/*
+*Project is live at: https://chatterroom.netlify.app//*
