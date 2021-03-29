@@ -42,7 +42,7 @@ const Chat = ({ location }) => {
     const [room, setRoom] = useState('');
     const [message,setMessage] = useState('');
     const [messages,setMessages] = useState([]);
-    const [users,setUsers] = useState([{name:"Chetas"},{name:"Ketan"}]);
+    const [users,setUsers] = useState([]);
     const ENDPOINT = "http://localhost:5000";
 
     useEffect(() => {
@@ -96,6 +96,7 @@ const Chat = ({ location }) => {
                                     label="Type Something" 
                                     fullWidth variant="outlined" 
                                     autoFocus = "true"
+                                    autoComplete="off"
                                     value={message}
                                     onChange = {(event)=>setMessage(event.target.value)}
                                     onKeyPress = {(event)=>(event.key === "Enter")? sendMessage() : null}

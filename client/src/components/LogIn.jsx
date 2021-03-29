@@ -75,7 +75,7 @@ const LogIn = () => {
                         id="email"
                         label="Email Address"
                         name="email"
-                        autoComplete="email"
+                        autoComplete="off"
                         autoFocus
                     />
                     <TextField

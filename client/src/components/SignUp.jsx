@@ -70,7 +70,6 @@ const SignUp = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                autoComplete="fname"
                                 name="firstName"
                                 variant="outlined"
                                 value={fname}
@@ -80,6 +79,7 @@ const SignUp = () => {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                autoComplete="no"
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -92,7 +92,7 @@ const SignUp = () => {
                                 id="lastName"
                                 label="Last Name"
                                 name="lastName"
-                                autoComplete="lname"
+                                autoComplete="no"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -105,7 +105,7 @@ const SignUp = () => {
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                autoComplete="email"
+                                autoComplete="off"
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -119,7 +119,7 @@ const SignUp = () => {
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
+                                autoComplete="off"
                             />
                         </Grid>
                     </Grid>

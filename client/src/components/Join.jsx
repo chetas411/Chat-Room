@@ -53,7 +53,7 @@ const Join = () => {
             id="name"
             label="Username"
             name="username"
-            autoComplete="username"
+            autoComplete="off"
             value={name}
             onChange={(event) => setName(event.target.value)}
             autoFocus
@@ -67,7 +67,7 @@ const Join = () => {
             label="Room"
             type="text"
             id="room"
-            autoComplete="room"
+            autoComplete="off"
             value={room}
             onChange={(event) => setRoom(event.target.value)}
           />
