@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(6),
         [theme.breakpoints.down('sm')]: {
-            padding: theme.spacing(2)
+            padding: theme.spacing(1),
+            overflow: "hidden"
         },
         height: '100vh',
     },
@@ -31,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
         height: '85vh',
         [theme.breakpoints.down('sm')]: {
-            height: '95vh'
+            position: 'relative',
+            height: '100vh'
         }
     },
 }));
@@ -90,7 +92,7 @@ const Chat = ({ location }) => {
                             <h2>{room}</h2>
                             <Messages messages = {messages} name = {name}/>
                             <Grid container style={{ padding: '20px',position: 'absolute', bottom: 0, left: 0}} >
-                                <Grid item xs={11}>
+                                <Grid item xs={10} sm={11}>
                                     <TextField 
                                     id="outlined-basic-email" 
                                     label="Type Something" 
@@ -102,7 +104,7 @@ const Chat = ({ location }) => {
                                     onKeyPress = {(event)=>(event.key === "Enter")? sendMessage() : null}
                                     />
                                 </Grid>
-                                <Grid xs={1} align="right">
+                                <Grid xs={2} sm={1} align="right">
                                     <Fab onClick={() => sendMessage()} color="primary" aria-label="add"><SendIcon /></Fab>
                                 </Grid>
                             </Grid>
